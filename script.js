@@ -6,6 +6,22 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('beforeunload', function () {
         saveTaskList();
     });
+
+    // Ініціалізація сортування за допомогою drag-n-drop
+    new Sortable(document.getElementById('taskList'), {
+        animation: 150,
+        store: {
+            // Зберігання порядку елементів у localStorage
+            set: function (sortable) {
+                saveTaskOrder(sortable.toArray());
+            },
+
+            // Відновлення порядку елементів із localStorage
+            get: function (sortable) {
+                return JSON.parse(localStorage.getItem('taskOrder')) || [];
+            },
+        },
+    });
 });
 
 function addTask() {
@@ -57,6 +73,11 @@ function saveTaskList() {
     localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
+function saveTaskOrder(order) {
+    // Зберігаємо порядок елементів у localStorage
+    localStorage.setItem('taskOrder', JSON.stringify(order));
+}
+
 function restoreTaskList() {
     var taskList = document.getElementById('taskList');
     var storedTasks = localStorage.getItem('tasks');
@@ -84,4 +105,3 @@ function restoreTaskList() {
         });
     }
 }
-

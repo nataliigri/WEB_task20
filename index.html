@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ToDo List</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
 </head>
 <body>
     <div class="container">
         <h1>ToDo List</h1>
         <input type="text" id="taskInput" placeholder="Enter a new task">
         <button onclick="addTask()">Add Task</button>
-        <ul id="taskList"></ul>
+        <ul id="taskList" class="sortable-list"></ul>
     </div>
 
     <script src="script.js"></script>
